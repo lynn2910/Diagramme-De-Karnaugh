@@ -57,17 +57,17 @@ pub(crate) fn get_conjonctive_form(
         }
 
         // construct the code
-        let mut sub_expr = String::new();
+        let mut sub_expr = Vec::new();
         for (i, var) in final_vars {
             let c = if let GrayCodeValue::Static(i) = var { i } else { continue };
             if c == &1 {
-                sub_expr.push_str(BARRED_LETTERS[i])
+                sub_expr.push(BARRED_LETTERS[i].to_string())
             } else {
-                sub_expr.push(LETTERS[i])
+                sub_expr.push(LETTERS[i].to_string())
             }
         }
 
-        expr.push(sub_expr);
+        expr.push(sub_expr.join(" + "));
     }
 
     if expr.len() < 2 {
